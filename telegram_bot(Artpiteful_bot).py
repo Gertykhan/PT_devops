@@ -17,13 +17,15 @@ dotenv_path = Path('data.env')
 load_dotenv(dotenv_path=dotenv_path)
 
 TOKEN = os.getenv('TOKEN')
-host = os.getenv('HOST')
-port = os.getenv('PORT')
-username = os.getenv('USER')
-password = os.getenv('PASSWORD')
+host = os.getenv('RM_HOST')
+host_db = os.getenv('DB_HOST')
+port = os.getenv('RM_PORT')
+port_db = os.getenv('DB_PORT')
+username = os.getenv('RM_USER')
+password = os.getenv('RM_PASSWORD')
 username_db = os.getenv('USER_DB')
 password_db = os.getenv('PASSWORD_DB')
-database = os.getenv('DATABASE')
+database = os.getenv('DB_DATABASE')
 connection = None
 
 # Подключаем логирование
@@ -197,8 +199,8 @@ def get_phone_numbers(update: Update, context):
     try:
         connection = psycopg2.connect(user=username_db,
                                     password=password_db,
-                                    host=host,
-                                    port="5432", 
+                                    host=host_db,
+                                    port=port_db,
                                     database=database)
 
         cursor = connection.cursor()
@@ -221,8 +223,8 @@ def get_emails(update: Update, context):
     try:
         connection = psycopg2.connect(user=username_db,
                                     password=password_db,
-                                    host=host,
-                                    port="5432", 
+                                    host=host_db,
+                                    port=port_db, 
                                     database=database)
 
         cursor = connection.cursor()
@@ -277,8 +279,8 @@ def phone_db(update: Update, context):
         try:
             connection = psycopg2.connect(user=username_db,
                                         password=password_db,
-                                        host=host,
-                                        port="5432", 
+                                        host=host_db,
+                                        port=port_db, 
                                         database=database)
             cursor = connection.cursor()
             for i in range(len(value)):
@@ -334,8 +336,8 @@ def email_db(update: Update, context):
         try:
             connection = psycopg2.connect(user=username_db,
                                         password=password_db,
-                                        host=host,
-                                        port="5432", 
+                                        host=host_db,
+                                        port=port, 
                                         database=database)
             cursor = connection.cursor()
             for i in range(len(value)):
